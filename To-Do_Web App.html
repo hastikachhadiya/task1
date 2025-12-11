@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic To-Do Web App</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: url('https://i.ibb.co/4W6bT0d/bluebg.jpg');
+            background-size: cover;
+        }
+
+        .navbar {
+            background: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px #0004;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            padding: 40px;
+        }
+
+        
+        .box {
+          margin-top: 40px;
+            width:400px;
+            background: rgba(255, 255, 255, 0.638);
+            padding: 40px;
+            border-radius: 6px;
+            box-shadow: 0 0 10px #0003;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+            border: 1px solid #ccccccc5;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+
+        textarea { height: 120px; }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background: #0eb60e;
+            color: white;
+            border: none;
+            font-size: 18px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+      
+        .list-area {
+            width: 55%;
+            color: white;
+        }
+
+        .list-area h3 {
+            display: grid;
+            grid-template-columns: 1fr 2fr 100px;
+            border-bottom: 2px solid white;
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+        }
+
+        .item {
+            display: grid;
+            grid-template-columns: 1fr 2fr 100px;
+            background: white;
+            color: black;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .delete-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 6px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">To-Do Web App</div>
+
+    <div class="container">
+
+        <!-- Left Form -->
+        <div class="box">
+            <input type="text" id="title" placeholder="Title">
+            <textarea id="desc" placeholder="Description"></textarea>
+            <button onclick="addTask()">Save</button>
+        </div>
+
+        <!-- Right List -->
+        <div class="list-area">
+            <h3>
+                <span>Title</span>
+                <span>Description</span>
+                <span>Delete</span>
+            </h3>
+
+            <div id="todoList"></div>
+        </div>
+
+    </div>
+
+    <script>
+        function addTask() {
+            let title = document.getElementById("title").value.trim();
+            let desc = document.getElementById("desc").value.trim();
+
+            if (title === "" || desc === "") {
+                alert("Please fill all fields");
+                return;
+            }
+
+            let div = document.createElement("div");
+            div.className = "item";
+
+            div.innerHTML = `
+                <span>${title}</span>
+                <span>${desc}</span>
+                <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
+            `;
+
+            document.getElementById("todoList").appendChild(div);
+
+            document.getElementById("title").value = "";
+            document.getElementById("desc").value = "";
+        }
+    </script>
+
+</body>
+</html>

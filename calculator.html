@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Calculator</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script>
+        var op1 = 0;
+        var op2 = 0;
+        var opt = "";
+        
+        function op(cid) {
+            var btn = document.getElementById(cid).id;
+            var txt = document.getElementById('txt');
+            switch (btn) {
+                case '1': 
+                case '2': 
+                case '3':
+                case '4': 
+                case '5': 
+                case '6':
+                case '7': 
+                case '8': 
+                case '9':
+                case '0': 
+                case '.':
+                    txt.value += btn;
+                    break;
+                case 'de': 
+                case 'mu': 
+                case 'mi': 
+                case 'pl': 
+                case 'eq': 
+                case 'per':
+                    if (op1 == 0) 
+                    {
+                        op1 = txt.value;
+                        txt.value = "";
+                        opt = btn;
+                    } else if (op2 == 0 || btn == 'eq') 
+                    {
+                        op2 = txt.value;
+                        if (btn == 'de' || opt == 'de') 
+                        op1 = parseFloat(op1) / parseFloat(op2);
+                        else if (btn == 'mu' || opt == 'mu') 
+                        op1 = parseFloat(op1) * parseFloat(op2);
+                        else if (btn == 'mi' || opt == 'mi') 
+                        op1 = parseFloat(op1) - parseFloat(op2);
+                        else if (btn == 'pl' || opt == 'pl') 
+                        op1 = parseFloat(op1) + parseFloat(op2);
+                        else if (btn == 'per' || opt == 'per') 
+                        op1 = (parseFloat(op1) * parseFloat(op2))/100;
+                        txt.value = op1;
+                        op1 = 0;
+                        op2 = 0;
+                    }
+                    break;
+                case 'ba':
+                    var str = txt.value;
+                    if (str.length != 0) {
+                        txt.value = str.substr(0, str.length - 1);
+                    }
+                    break;
+                case 'ce':
+                    op1 = 0;
+                    op2 = 0;
+                    txt.value = "";
+                    break;
+                case 'plm':
+                    txt.value = (parseFloat(txt.value) * -1).toString();
+                    break;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container bg-dark pd-5" style="width: 30%; margin-top: 60px;">
+        <br>
+        <h2 class="text-white" align="center">Standard Calculator</h2>
+        <hr class="mb-3 text-white" style="border: 2px solid rgba(255, 0, 0, 0.497);">
+        <div align="center">
+            <input type="text" id="txt" value="" class="mb-3" style="width: 400px; height: 50px; font-size: 40px;">
+        </div>
+        <div align="center">
+            <button type="button" id="per" value="per" class="btn btn-info" style="width: 70px; height: 50px; margin: 10px;" onclick="op(this.id)">%</button>
+            <button type="button" id="ce" class="btn btn-info" style="width: 70px; height: 50px; margin: 10px;" onclick="op(this.id)">CE</button>
+            <button type="button" id="ba" class="btn btn-info" style="width: 70px; height: 50px; margin: 10px;" onclick="op(this.id)">Back</button>
+            <button type="button" id="de" class="btn btn-info" style="width: 70px; height: 50px; margin: 10px;" onclick="op(this.id)">&divide;</button>
+        </div>
+        <div align="center" class="my-2">
+            <button type="button" id="7" class="btn btn-info" style="width: 70px; height: 50px; margin: 10px;" onclick="op(this.id)">7</button>
+            <button type="button" id="8" class="btn btn-info" style="width: 70px; height: 50px; margin: 10px;" onclick="op(this.id)">8</button>
+            <button type="button" id="9" class="btn btn-info" style="width: 70px; height: 50px; margin: 10px;" onclick="op(this.id)">9</button>
+            <button type="button" id="mu" class="btn btn-info" style="width: 70px; height: 50px; margin: 10px;" onclick="op(this.id)">&times;</button>
+        </div>
+        <div align="center" class="my-2">
+            <button type="button" id="4" class="btn btn-info" style="width: 70px; height: 50px; margin: 10px;" onclick="op(this.id)">4</button>
+            <button type="button" id="5" class="btn btn-info" style="width: 70px; height: 50px; margin: 10px;" onclick="op(this.id)">5</button>
+            <button type="button" id="6" class="btn btn-info" style="width: 70px; height: 50px; margin: 10px;" onclick="op(this.id)">6</button>
+            <button type="button" id="mi" class="btn btn-info" style="width: 70px; height: 50px; margin: 10px;" onclick="op(this.id)">&minus;</button>
+        </div>
+        <div align="center" class="my-2">
+            <button type="button" id="1" class="btn btn-info" style="width: 70px; height: 50px; margin: 10px;" onclick="op(this.id)">1</button>
+            <button type="button" id="2" class="btn btn-info" style="width: 70px; height: 50px; margin: 10px;" onclick="op(this.id)">2</button>
+            <button type="button" id="3" class="btn btn-info" style="width: 70px; height: 50px; margin: 10px;" onclick="op(this.id)">3</button>
+            <button type="button" id="pl" class="btn btn-info" style="width: 70px; height: 50px; margin: 10px;" onclick="op(this.id)">&plus;</button>
+        </div>
+        <div align="center" class="my-2">
+            <button type="button" id="plm" class="btn btn-info" style="width: 70px; height: 50px; margin: 10px;" onclick="op(this.id)">+/-</button>
+            <button type="button" id="0" class="btn btn-info" style="width: 70px; height: 50px; margin: 10px;" onclick="op(this.id)">0</button>
+            <button type="button" id="." class="btn btn-info" style="width: 70px; height: 50px; margin: 10px;" onclick="op(this.id)">.</button>
+            <button type="button" id="eq" class="btn btn-info" style="width: 70px; height: 50px; margin: 10px;" onclick="op(this.id)">=</button>
+        </div>
+        <br>
+    </div>
+</body>
+</html>
